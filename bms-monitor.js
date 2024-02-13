@@ -1,20 +1,10 @@
-const {expect} = require('chai');
+const {checkTemperature, checkSOC, checkChargeRate} = require('./bms-checkFunctions')
 
 function batteryIsOk(temperature, soc, charge_rate) {
-    if (!(temperature >= 0 && temperature <=45)) {
-        console.log('Temperature is out of range!');
-        return false;
-    }
-    if (!(soc >= 20 && soc <= 40)) {
-        console.log('State of Charge is out of range!')
-        return false;
-    }
-    if (charge_rate > 0.8) {
-        console.log('Charge rate is out of range!');
-        return false;
-    }
-    return true;
+    const tempStatus = checkTemperature(temperature)
+    const SOCStatus = checkSOC(soc)
+    const chargeRateStatus = checkChargeRate(charge_rate)
+    return tempStatus && SOCStatus && chargeRateStatus
 }
 
-expect(batteryIsOk(25, 70, 0.7)).to.be.true;
-expect(batteryIsOk(50, 85, 0)).to.be.false;
+module.exports = {batteryIsOk}
