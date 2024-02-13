@@ -84,12 +84,29 @@ describe("Battery Monitor System Test", () => {
         });
 
     })
-    
+    describe("BatteryIsOk Function Test",()=>{
+        afterEach(()=>{
+            getLog(3).forEach(log => console.log(log.message))
+        })
+        it("should return true for 20,30,0.8",()=>{
+            assert.equal(batteryIsOk(20,30,0.8),true)
+        })
+        it("should return false for 50,30,0.8",()=>{
+            assert.equal(batteryIsOk(50,30,0.8),false)
+        })
+        it("should return false for 20,60,0.8",()=>{
+            assert.equal(batteryIsOk(20,60,0.8),false)
+        })
+        it("should return false for 20,30,0.9",()=>{
+            assert.equal(batteryIsOk(20,30,0.9),false)
+        })
+        it("should return false for 41,44,9",()=>{
+            assert.equal(batteryIsOk(41,44,9),false)
+        })
+    })
 })
 
 
-// testBattery(25, 30, 0.7, true)
-// testBattery(50, 85, 0, false)
 // testBattery(60,90,10,false)
 // testBattery(-10,9,0,false)
 // testBattery(0,0,0,false)
