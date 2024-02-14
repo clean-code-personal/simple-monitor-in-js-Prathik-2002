@@ -5,6 +5,9 @@ const {getLog} = require('./bms-log')
 const {checkTemperature, checkSOC, checkChargeRate} = require('./bms-checkFunctions')
 
 describe("Battery Monitor System Test", () => {
+    after(()=>{
+        console.table(getLog())
+    })
     describe("CheckTemperature Function test", ()=>{
         afterEach(()=>{
             console.log(getLog(1)[0].message)
@@ -105,7 +108,6 @@ describe("Battery Monitor System Test", () => {
         })
     })
 })
-
 
 // testBattery(60,90,10,false)
 // testBattery(-10,9,0,false)
