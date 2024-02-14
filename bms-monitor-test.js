@@ -108,7 +108,3 @@ describe("Battery Monitor System Test", () => {
         })
     })
 })
-
-// testBattery(60,90,10,false)
-// testBattery(-10,9,0,false)
-// testBattery(0,0,0,false)
