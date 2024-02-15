@@ -1,6 +1,6 @@
-const {levelOfBreach} = require('./bms-initializeCheckFunctions')
+const {levelOfBreach} = require('./bms-checkParameter')
 const {parameters} = require('./bms-parameters')
-const {convertToCommonUnit} = require('./bms-prepareParameters')
+const {convertToCommonUnit} = require('./bms-convertParameterInputs')
 const {messageCodeFromLevelOfBreach} = require('./bms-language')
 const {addLog} = require('./bms-log')
 function checkStatus(parameterName, parameterValue){
@@ -20,7 +20,6 @@ function batteryIsOk(temperature, soc, charge_rate) {
     StatusOfAllParameters.push(checkStatus('temperature',temperature))
     StatusOfAllParameters.push(checkStatus('soc', soc))
     StatusOfAllParameters.push(checkStatus('chargeRate',charge_rate))
-    console.log(StatusOfAllParameters)
     return StatusOfAllParameters.every((value)=>value);
     
 }

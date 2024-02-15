@@ -3,7 +3,9 @@ const assert = require('assert');
 const {batteryIsOk} = require('../bms-monitor')
 const {getLog} = require('../bms-log')
 
-
+function addBatteryTest(temperature, soc, chargeRate){
+    
+}
 
 describe("Battery Monitor System Test", () => {
     after(()=>{
