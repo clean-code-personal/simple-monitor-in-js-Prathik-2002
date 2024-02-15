@@ -1,7 +1,7 @@
 const LOG = []
 const log_template = {
     name:'',
-    parameters: {},
+    value: '',
     result:"",
     message: "",
     date: "", 
@@ -14,11 +14,11 @@ function getLog(head = LOG.length){
     }
     return LOG.slice(-head)
 }
-function addLog(name, parameters, result, message, date, time){
+function addLog(name, value, result, message){
     const currentdate = new Date()
     let new_log = Object.assign({},log_template);
     new_log.name = name
-    new_log.parameters = parameters; 
+    new_log.value = value; 
     new_log.message = message
     new_log.result = result
     new_log.date = currentdate.toLocaleDateString()

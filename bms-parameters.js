@@ -1,8 +1,30 @@
-const MIN_TEMPERATURE = 0
-const MAX_TEMPERATURE = 40
-const MIN_SOC = 20
-const MAX_SOC = 40
-const MIN_CHARGING_RATE = 0
-const MAX_CHARGING_RATE = 0.8
-
-module.exports = {MIN_TEMPERATURE, MAX_TEMPERATURE, MIN_SOC, MAX_SOC, MIN_CHARGING_RATE, MAX_CHARGING_RATE}
+const warningTolerance = 5
+const parameters = {
+    "temperature": {
+        boundaries: {
+            lowBreachAndLowWarningBoundary: 0, 
+            lowWarningAndNormalBoundary:(0 + 45*warningTolerance/100),
+            NormalAndhighWarningBoundary:(45 - 45*warningTolerance/100),
+            highWarningAndHighBreachBoundary: 45,
+    }
+    },
+    "soc": {
+        boundaries: {
+            lowBreachAndLowWarningBoundary: 20, 
+            lowWarningAndNormalBoundary:(20 + 40*warningTolerance/100),
+            NormalAndhighWarningBoundary:(40 - 40*warningTolerance/100),
+            highWarningAndHighBreachBoundary: 40,
+        }
+    },
+    "chargeRate": {
+        boundaries: {
+            lowWarningAndNormalBoundary: 0,
+            lowBreachAndLowWarningBoundary: 0, 
+            NormalAndhighWarningBoundary:(0.80 - 0.80*warningTolerance/100),
+            highWarningAndHighBreachBoundary: 0.80,
+        },
+    }
+}
+const temp = 'temperature'
+console.log(parameters[temp].boundaries)
+module.exports = {parameters}
