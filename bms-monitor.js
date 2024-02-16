@@ -20,11 +20,12 @@ function checkStatus(parameterName, parameterValue){
     return false
 }
 
-function batteryIsOk(temperature, soc, charge_rate) {    
+function batteryIsOk(temperature, soc, charge_rate) { 
+    const ParameterInputs = [temperature, soc, charge_rate]   
     const StatusOfAllParameters = []
-    StatusOfAllParameters.push(checkStatus('temperature',temperature))
-    StatusOfAllParameters.push(checkStatus('soc', soc))
-    StatusOfAllParameters.push(checkStatus('chargeRate',charge_rate))
+    Object.keys(parameters).forEach((parameter,index)=>{
+        StatusOfAllParameters.push(checkStatus(parameter,ParameterInputs[index]))
+    })
     return StatusOfAllParameters.every((value)=>value);
     
 }
