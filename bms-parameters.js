@@ -25,6 +25,4 @@ const parameters = {
         },
     }
 }
-const temp = 'temperature'
-console.log(parameters[temp].boundaries)
 module.exports = {parameters}
