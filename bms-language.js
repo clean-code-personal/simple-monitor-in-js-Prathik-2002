@@ -1,12 +1,30 @@
-const message = {
-
-        1 :(`is low`),
-        2 : (`is getting low warning`),
-        3 : (` OK`),
-        4 : (` is getting high warning`),
-        5 : (` is high`),
+const LanuageMessage = {
+    en:{
+        message:[
+                'Breach : too low',
+                'Warning : approaching low Breach',
+                'OK: Normal',
+                'Warning : approaching high Breach',
+                'Breach : too high',
+            ],
+        parameterName: {temperature:"Temperature", soc:"State of Charge", chargeRate: "Charge Rate"}
+    },
+    ger:{
+        message:[
+            'Bruch: zu niedrig',
+            'Warnung: Tiefer Durchbruch naht',
+            'OK: Normal',
+            'Warnung: Hoher Durchbruch steht bevor',
+            'Verstoß: zu hoch'
+        ],
+        parameterName: {temperature:'Temperatur', soc:'Ladezustand', chargeRate:"Ladestrom"}
+    },
 }
-function messageCodeFromLevelOfBreach(levelOfBreach, parameterName)  {
-    return `${parameterName} ${message[levelOfBreach+3]} `
+function messageCodeFromLevelOfBreach(levelOfBreach)  {
+    return levelOfBreach + 2
 }
-module.exports = {messageCodeFromLevelOfBreach}
+function getMessage(lang, levelOgBreach, parameterName){
+    const messageCode = messageCodeFromLevelOfBreach(levelOgBreach)
+    return `${LanuageMessage[lang].parameterName[parameterName]} ${LanuageMessage[lang].message[messageCode]}`
+}
+module.exports = {getMessage}
