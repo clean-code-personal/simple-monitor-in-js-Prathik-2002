@@ -26,4 +26,4 @@ function addLog(name, value, result, message){
     LOG.push(new_log)
 }
 
-module.exports = {getLog, addLog, log_template}
+module.exports = {getLog, addLog}
