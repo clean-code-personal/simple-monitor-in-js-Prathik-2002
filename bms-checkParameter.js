@@ -4,26 +4,17 @@
 //High parameter warning => 1
 //High parameter breach => 2
 function levelOfBreach(boundaries, value) {
-    const isBreached = checkPositiveOrNegativeSideOfBreachBoundary(boundaries, value)
+    const isBreached = checkPositionOfValueINOrOutOfBoundary(boundaries.lowBreachAndLowWarningBoundary,boundaries.highWarningAndHighBreachBoundary, value)
     if(isBreached == 0){ 
-        return checkPositiveOrNegativeSideOfWarningBoundary(boundaries, value)
+        return checkPositionOfValueINOrOutOfBoundary(boundaries.lowWarningAndNormalBoundary,boundaries.NormalAndhighWarningBoundary, value)
     }
     return 2*isBreached
 }
-function checkPositiveOrNegativeSideOfBreachBoundary(boundaries, value){
-    if(value < boundaries.lowBreachAndLowWarningBoundary){
+function checkPositionOfValueINOrOutOfBoundary(leftBoundary, rightBoundary, value){
+    if(value < leftBoundary){
         return -1
     }
-    if(value > boundaries.highWarningAndHighBreachBoundary){
-        return 1
-    }
-    return 0
-}
-function checkPositiveOrNegativeSideOfWarningBoundary(boundaries, value){
-    if(value < boundaries.lowWarningAndNormalBoundary){
-        return -1
-    }
-    if(value > boundaries.NormalAndhighWarningBoundary){
+    if(value > rightBoundary){
         return 1
     }
     return 0
