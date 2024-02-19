@@ -1,7 +1,9 @@
 const {expect} = require('chai');
 const assert = require('assert');
+const {parameters} = require('../bms-parameters')
 const {batteryIsOk, SetLanguage} = require('../bms-monitor')
 const {getLog} = require('../bms-log')
+const {ParameterTest} = require('./bms-test-checkParameters')
 const batteryTestCases = [
     ["ger","30 C", "30", "0.5", true, ['Temperatur OK: Normal','Ladezustand OK: Normal','Ladestrom OK: Normal']],
     ["ger","20 C","30","0.80",false, ['Temperatur OK: Normal','Ladezustand OK: Normal','Ladestrom Warnung: Hoher Durchbruch steht bevor']],
@@ -9,24 +11,29 @@ const batteryTestCases = [
     ["en","100 C", "38", "0.2", false, ['Temperature Breach : too high', 'State of Charge OK: Normal','Charge Rate OK: Normal' ]],
     ["en","290 K", "19", "0.2", false, ['Temperature OK: Normal','State of Charge Breach : too low','Charge Rate OK: Normal']]
 ]
+
 function BatteryTest(lang,temperature, soc, chargeRate, expected, expectedMessages){
     it(`should return ${expected} with message ${expectedMessages} for inputs ${temperature}, ${soc} and  ${chargeRate}`,()=>{
         SetLanguage(lang)
         assert.equal(batteryIsOk(temperature, soc, chargeRate), expected)
-        const LogMessages = getLog(3)
+        const noOfLogs = Object.keys(parameters).length
+        const LogMessages = getLog(noOfLogs)
         LogMessages.forEach((logMessage, index)=>{
             assert.equal(logMessage.message, expectedMessages[index])
         })
     })
 }
 
+
 describe("Battery Monitor System Test", () => {
     after(()=>{
         console.table(getLog())
     })
+    ParameterTest()
     describe("BatteryIsOk Function Test",()=>{
         afterEach(()=>{
-            getLog(3).forEach(log => console.log(log.message))
+            const noOfLogs = Object.keys(parameters).length
+            getLog(noOfLogs).forEach(log => console.log(log.message))
         })
         batteryTestCases.forEach(testCase => {BatteryTest(...testCase)})
     })
