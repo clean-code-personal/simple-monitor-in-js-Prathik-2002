@@ -5,7 +5,7 @@ const levelOfBreacheMappedToMessage = {
     "-1": "lowBreachWarning",
     "0" : "normal",
     "1" : "highBreachWarning",
-    "2" : "highBreach"
+    "2" : "highBreach",
 }
 
 function getMessage(lang, levelOgBreach, parameterName){
