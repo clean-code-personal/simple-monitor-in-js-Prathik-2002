@@ -3,6 +3,7 @@
 //Normal => 0
 //High parameter warning => 1
 //High parameter breach => 2
+
 function levelOfBreach(boundaries, value) {
     const isBreached = checkPositionOfValueINOrOutOfBoundary(boundaries.lowBreachAndLowWarningBoundary,boundaries.highWarningAndHighBreachBoundary, value)
     if(isBreached == 0){ 

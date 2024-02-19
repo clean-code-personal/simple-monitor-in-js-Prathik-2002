@@ -1,7 +1,7 @@
 const {levelOfBreach} = require('./bms-checkParameter')
 const {parameters} = require('./bms-parameters')
 const {convertToCommonUnit} = require('./bms-convertParameterInputs')
-const {getMessage} = require('./bms-language')
+const {getMessage} = require('./bms-MessageFromLevelOfBreach')
 const {addLog} = require('./bms-log')
 
 let LANGUAGE = "ger"
@@ -27,6 +27,5 @@ function batteryIsOk(temperature, soc, charge_rate) {
         StatusOfAllParameters.push(checkStatus(parameter,ParameterInputs[index]))
     })
     return StatusOfAllParameters.every((value)=>value);
-    
 }
-module.exports = {batteryIsOk, SetLanguage}
+module.exports = {batteryIsOk, checkStatus, SetLanguage}
